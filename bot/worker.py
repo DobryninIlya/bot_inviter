@@ -7,8 +7,6 @@ from clients.tg.api import TgClient
 from bot.handler import message_handler
 
 
-# from clients.tg.dcs import UpdateObj
-
 
 class Worker:
     def __init__(self, token: str, queue: asyncio.Queue, concurrent_workers: int):
