@@ -3,7 +3,7 @@ import random
 from ..BotClasses import Command as command_class
 from ..BotClasses import User, Message
 from ..BotClasses.Keyboards import keyboard
-from ..BotClasses.Stage_handler import Stage
+# from ..BotClasses.Stage_handler import Stage
 from clients.tg.api import TgClient
 
 
@@ -15,6 +15,6 @@ async def processor(user: User, message: Message, tg_client: TgClient, callback_
 
 command = command_class()
 
-command.keys = ['купить', 'как купить', 'цена']
+command.keys = ['купить/поддержка', 'купить', 'как купить', 'цена']
 command.process = processor
 command.payload = []

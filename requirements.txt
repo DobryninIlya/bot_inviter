@@ -1,10 +1,4 @@
 aiogram~=2.22.2
 aiohttp~=3.8.3
 asyncio~=3.4.3
-beautifulsoup4
-lxml
-ics==0.7
-python-docx~=0.8.11
 requests
-Pyrogram~=2.0.106
-psycopg2~=2.9.6

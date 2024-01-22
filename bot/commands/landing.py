@@ -3,7 +3,7 @@ import random
 from ..BotClasses import Command as command_class
 from ..BotClasses import User, Message
 from ..BotClasses.Keyboards import keyboard
-from ..BotClasses.Stage_handler import Stage
+# from ..BotClasses.Stage_handler import Stage
 from clients.tg.api import TgClient
 
 

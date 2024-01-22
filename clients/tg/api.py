@@ -87,7 +87,7 @@ class TgClient:
         url = self.get_url("getChatMember")
         payload = {
             'user_id': user_id,
-            'chat_id': '@botkainews'
+            'chat_id': '@TelegaHubChannel'
         }
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload) as resp:
