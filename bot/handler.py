@@ -54,11 +54,7 @@ async def message_handler(update, tg_client, debug=False):
         return
     user = User(message)
 
-    subscribe_checking = await check_subscription(tg_client, user.id)
-    if not subscribe_checking:
-        msg = "Для использования бота необходимо подписаться на канал @TelegaHubChannel"
-        await tg_client.send_message(user.id, msg, buttons=keyboard('subscribe_button', user).get_link())
-        return
+
     if message.text and message.text[0] == '/':  # Remove slash
         message.text = message.text[1:]
     stage = Stage(user, message)
@@ -104,7 +100,9 @@ async def message_handler(update, tg_client, debug=False):
         return
     if message.callback_query_id:
         return
-    await tg_client.send_message(user.id, "Я не понимаю тебя :( \n Выбери кнопки в меню", buttons=keyboard('main_keyboard', user).get_keyboard())
+    await tg_client.send_message(user.id, """Я не понимаю тебя :( 
+
+Бот умеет лишь оформлять подписку, чтобы задать интересующие тебя вопросы, пиши нашему модератору — @literaturaforheartandmind 😉""", buttons=keyboard('main_keyboard', user).get_keyboard())
     stage._set_status(0)
 
 

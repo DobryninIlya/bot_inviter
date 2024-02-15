@@ -3,13 +3,11 @@ import datetime as dt
 from .User import User
 
 main_keyboard = [
-    ["Реактивный бот"],
-    ["Купить/поддержка"],
+    ["Подписка"],
 ]
-
-subscribe = [[['Открыть', 'https://t.me/+WncZ5PybI9I5YzAy']]]
-support_button = [[['Чат с поддержкой', 'https://t.me/reactive_tg_bot']]]
-reactive_bot_landing = [[['Презентация', 'https://bookingandrent.ru/reactive_bot']]]
+exit = [
+     ["Выход"]
+ ]
 
 
 
@@ -18,17 +16,13 @@ class keyboard:
         self.type_name = type_name
         self.buttons = []
         self.user = user
+        if buttons is not None:
+            self.buttons = buttons
         if self.type_name == 'main_keyboard':
             self.buttons = main_keyboard
 
         elif self.type_name == 'exit':
             self.buttons = exit
-        elif self.type_name == 'subscribe_button':
-            self.buttons = subscribe
-        elif self.type_name == 'support_button':
-            self.buttons = support_button
-        elif self.type_name == 'reactive_bot_landing':
-            self.buttons = reactive_bot_landing
 
 
 
