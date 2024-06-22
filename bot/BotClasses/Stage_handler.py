@@ -5,7 +5,7 @@ from . import cursor, connection
 
 class Stage:
     def __init__(self, user: User, message: Message):
-        self.user_id = 0
+        self.user_id = user.id
         self.message = message
         self.cursor = cursor
         self.connectionection = connection

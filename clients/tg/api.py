@@ -136,3 +136,17 @@ class TgClient:
                     return res_dict
         except:
             print('Ошибка:\n', traceback.format_exc())
+
+    async def delete_message_by_id(self, chat_id: int, message_id: int):
+        try:
+            url = self.get_url("deleteMessage")
+            payload = {
+                'chat_id': chat_id,
+                'message_id': message_id
+            }
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, json=payload) as resp:
+                    res_dict = await resp.json()
+                    return res_dict
+        except:
+            print('Ошибка:\n', traceback.format_exc())

@@ -3,32 +3,41 @@ import datetime as dt
 from .User import User
 
 main_keyboard = [
-    ["Реактивный бот"],
-    ["Купить/поддержка"],
+    ["Забронировать транспорт"],
+    ["Вопросы и ответы"],
+    ["Наш сайт"]
 ]
 
-subscribe = [[['Открыть', 'https://t.me/+WncZ5PybI9I5YzAy']]]
-support_button = [[['Чат с поддержкой', 'https://t.me/reactive_tg_bot']]]
-reactive_bot_landing = [[['Презентация', 'https://bookingandrent.ru/reactive_bot']]]
+exit = [
+    ["Выйти"]
+]
 
+site = [[['Открыть сайт', 'https://getmecar.ru/']]]
+faq = [[['Ответы на вопросы', 'https://telegra.ph/CHasto-zadavaemye-voprosy-02-10-5']]]
 
+start_lead = [[["Заполнить заявку", 'start_lead']]]
 
+null_inline = [[["", '']]]
 class keyboard:
     def __init__(self, type_name: str, user: User, buttons: list = None, payload=None):
         self.type_name = type_name
         self.buttons = []
         self.user = user
-        if self.type_name == 'main_keyboard':
+        if self.type_name == 'main':
             self.buttons = main_keyboard
 
         elif self.type_name == 'exit':
             self.buttons = exit
-        elif self.type_name == 'subscribe_button':
-            self.buttons = subscribe
-        elif self.type_name == 'support_button':
-            self.buttons = support_button
-        elif self.type_name == 'reactive_bot_landing':
-            self.buttons = reactive_bot_landing
+        elif self.type_name == 'site':
+            self.buttons = site
+        elif self.type_name == "null":
+            self.buttons = []
+        elif self.type_name == "start_lead":
+            self.buttons = start_lead
+        elif self.type_name == "site":
+            self.buttons = site
+        elif self.type_name == "faq":
+            self.buttons = faq
 
 
 
@@ -50,7 +59,7 @@ class keyboard:
         return keyboard
 
     def get_keyboard(self) -> list:
-        if not len(self.buttons):
+        if len(self.buttons) == 0:
             keyboard = {
                 'remove_keyboard': True
             }

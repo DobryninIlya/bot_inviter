@@ -5,7 +5,6 @@ from bot.BotClasses import command_list, Message, User
 from bot.BotClasses.Keyboards import keyboard
 from bot.BotClasses.Stage_handler import Stage
 
-
 def load_modules():
     try:
         files = os.listdir('/home/dobrynin/inviter/bot/commands')
@@ -54,18 +53,16 @@ async def message_handler(update, tg_client, debug=False):
         return
     user = User(message)
 
-    subscribe_checking = await check_subscription(tg_client, user.id)
-    if not subscribe_checking:
-        msg = "Для использования бота необходимо подписаться на канал @TelegaHubChannel"
-        await tg_client.send_message(user.id, msg, buttons=keyboard('subscribe_button', user).get_link())
+    if message.chat['id'] < 0 and message.text != '/linkchat':
         return
+
     if message.text and message.text[0] == '/':  # Remove slash
         message.text = message.text[1:]
     stage = Stage(user, message)
 
-    if message.text and message.text.lower() == 'выход':
+    if message.text and message.text.lower() == 'выход' or message.text.lower() == 'выйти':
         await tg_client.send_message(user.id, 'Главное меню',
-                                     buttons=keyboard('main_keyboard', user).get_keyboard())
+                                     buttons=keyboard('main', user).get_keyboard())
         stage._set_status(0)
         return
 
@@ -104,7 +101,7 @@ async def message_handler(update, tg_client, debug=False):
         return
     if message.callback_query_id:
         return
-    await tg_client.send_message(user.id, "Я не понимаю тебя :( \n Выбери кнопки в меню", buttons=keyboard('main_keyboard', user).get_keyboard())
+    await tg_client.send_message(user.id, "Я не понимаю тебя :( \n Выбери кнопки в меню", buttons=keyboard('main', user).get_keyboard())
     stage._set_status(0)
 
 
