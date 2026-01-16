@@ -67,8 +67,9 @@ class WaClient:
                 async with session.post(url, json=payload) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def send_file_by_url(self, chat_id: str, url_file: str, filename: str, caption: str = ''):
         """
@@ -92,8 +93,9 @@ class WaClient:
                 async with session.post(url, json=payload) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def send_file_by_upload(self, chat_id: str, file_path: str, filename: str, caption: str = ''):
         """
@@ -107,10 +109,13 @@ class WaClient:
         """
         try:
             url = self.get_url("sendFileByUpload")
+            # Read file content before creating the request
+            with open(file_path, 'rb') as f:
+                file_content = f.read()
+            
             data = aiohttp.FormData()
             data.add_field('chatId', chat_id)
-            with open(file_path, 'rb') as f:
-                data.add_field('file', f, filename=filename)
+            data.add_field('file', file_content, filename=filename)
             if caption:
                 data.add_field('caption', caption)
             
@@ -118,8 +123,9 @@ class WaClient:
                 async with session.post(url, data=data) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def get_chat_history(self, chat_id: str, count: int = 100) -> dict:
         """
@@ -159,8 +165,9 @@ class WaClient:
                 async with session.post(url, json=payload) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def send_contact(self, chat_id: str, contact_phone: str, contact_name: str):
         """
@@ -184,8 +191,9 @@ class WaClient:
                 async with session.post(url, json=payload) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def send_location(self, chat_id: str, latitude: float, longitude: float, name_location: str = '', address: str = ''):
         """
@@ -214,8 +222,9 @@ class WaClient:
                 async with session.post(url, json=payload) as resp:
                     res_dict = await resp.json()
                     return res_dict
-        except:
+        except Exception as e:
             print('Ошибка:\n', traceback.format_exc())
+            return {'error': True, 'message': str(e)}
 
     async def get_settings(self) -> dict:
         """Get instance settings"""
